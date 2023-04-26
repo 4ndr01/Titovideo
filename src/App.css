@@ -1,38 +1,502 @@
-.App {
-  text-align: center;
+
+
+/*header*/
+
+
+.header {
+    background-color: #242423;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    transition: all 0.5s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:#100b47;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 0;
+    margin-left: 42rem
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header__title2 {
+    color:#7421fc;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: auto;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border: red 1px solid;
 }
 
-.App-link {
-  color: #61dafb;
+
+
+h2 {
+    margin-left: 2rem;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.user {
+    margin-right: 10rem;
+    width: 100%;
+    max-width: 1200px;
+    color: black;
+
+    font-size: 2rem;
+    margin-bottom: 7rem;
 }
+
+.btn btn-primary {
+    background-color: #7421fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 2rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: whitesmoke;
+}
+
+
+.sidenav .close {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+}
+
+/* Icône burger */
+.burger-icon span {
+    display: block;
+    width: 35px;
+    height: 5px;
+
+    margin: 6px 0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #EFFFFA;
+    height: 100vh;
+
+    text-rendering: optimizeLegibility;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+img {
+    border-radius: 5px;
+    height: auto;
+    width: 10rem;
+}
+
+div {
+    text-align: center;
+}
+
+small {
+    display: block;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.commande {
+
+    margin-right: 50rem;
+    margin-top: 5rem;
+}
+
+.commande_en_cours {
+
+    margin-top: 2rem;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-image: url("https://images.pexels.com/photos/3928610/pexels-photo-3928610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    background-position: center;
+    height: 13rem;
+
+
+
+    color: transparent;
+
+
+}
+
+
+
+.commande_en_cours:hover {
+    color: #edede9;
+
+    /*dézoomer l'image*/
+    transform: scale(1.1);
+    /*dézoomer l'image*/
+    transition: all 0.5s ease-in-out;
+
+
+}
+
+
+
+
+
+.input_upload{
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 2rem;
+    background:  whitesmoke;
+
+}
+
+.btn_upload {
+    background-color: #7421fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 2rem;
+}
+
+
+
+
+.tarifs_title{
+    /*text*/
+    color: #100b47;
+    font-size: 35px;
+    font-weight: bold;
+    padding: 0;
+   margin-right: 3rem;
+    margin-top: 5rem;
+
+
+}
+.tarifs_div1{
+    border: solid 1px #100b47;
+    margin-left: 2rem;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+
+    height: 30rem;
+    width: 20rem;
+
+
+
+}
+
+.tarifs_div1:hover {
+
+    box-shadow: #7421fc 0px 0px 10px 0px;
+    /*dézoomer l'image*/
+    transform: scale(1.1);
+    /*dézoomer l'image*/
+    transition: all 0.5s ease-in-out;
+}
+
+
+.tarifs_title2{
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.prix{
+    font-weight: bold;
+
+    font-size: 1.5rem;
+
+}
+
+
+
+.info{
+    margin-top: 2rem;
+
+    font-size: 1rem;
+
+    color: #100b47;}
+
+.info_titre{
+    font-weight: bold;
+
+
+}
+
+
+.tarifs{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+
+
+
+
+
+
+
+
+
+}
+
+.info_p1{
+    color: #100b47;
+    margin-top: 1rem;
+    margin-right: 1.5rem;
+}
+.info_p2{
+    color: #100b47;
+}
+
+.info_p3{
+    color: #100b47;
+    margin-left: 1rem;
+}
+
+.info_p4{
+    color: #100b47;
+    margin-right: 5rem;
+}
+
+.info_p5{
+    color: #100b47;
+    margin-right: 7rem;
+}
+
+.btn_tarifs{
+    margin-top: 6rem;
+
+    background-color: #7421fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+.info__p1{
+    margin-top: 1rem;
+
+}
+
+.info__p2{
+    margin-left: 2rem;
+
+}
+
+.info__p3{
+    margin-right: 2rem;
+
+}
+
+.info__p4{
+    margin-left: 2.5rem;
+}
+
+.info__p5{
+    margin-left: 0.3rem;
+
+}
+
+.info__p6{
+    margin-right: 5.75rem;
+
+}
+
+
+.form__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 13rem;
+    color: #100b47;
+}
+
+.form__video {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+
+}
+
+.form__video__1{
+    margin-right: 2rem;
+    width: 10rem;
+    height: 10rem;
+
+    border-radius: 10px;
+    background: #242423;
+    color: #edede9;
+
+
+
+}
+.form__video__1:hover {
+
+    background-image: url("https://images.pexels.com/photos/320617/pexels-photo-320617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    background-position: center;
+
+
+    /*dézoomer l'image*/
+    transform: scale(1.1);
+    /*dézoomer l'image*/
+    transition: all 0.5s ease-in-out;
+    color: black;
+    font-weight: bold;
+    .p__form{
+        display: none;
+    }
+
+}
+.form__video__1:active{
+    border: solid 3px #100b47;
+    /*ne pas reinisialiser la couleur*/
+
+    /*faire pause*/
+    animation-play-state: paused;
+
+
+}
+.form__video__2{
+    margin-right: 2rem;
+    width: 10rem;
+    height: 10rem;
+
+    border-radius: 10px;
+    background: #242423;
+    color: #edede9;
+
+}
+
+.form__video__2:hover{
+    background-image: url("https://images.pexels.com/photos/682933/pexels-photo-682933.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    background-position: center;
+    /*dézoomer l'image*/
+    transform: scale(1.1);
+    /*dézoomer l'image*/
+    transition: all 1s ease-in-out;
+    color: black;
+    font-weight: bold;
+.p__form{
+    display: none;
+}
+
+}
+
+.form__video__3{
+    background: #242423;
+    margin-right: 2rem;
+    width: 10rem;
+    height: 10rem;
+
+    border-radius: 10px;
+    color: #edede9;
+}
+
+.form__video__3:hover{
+    background-image: url("https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg");
+    background-size: cover;
+    background-position: center;
+    /*dézoomer l'image*/
+    transform: scale(1.1);
+    /*dézoomer l'image*/
+    transition: all 1s ease-in-out;
+    color: black;
+    font-weight: bold;
+.p__form{
+    display: none;
+}
+}
+
+.form__video__4{
+    color: #edede9;
+    background: #242423;
+    margin-right: 2rem;
+    width: 10rem;
+    height: 10rem;
+
+    border-radius: 10px;
+}
+.form__video__4:hover{
+    background-image: url("https://images.pexels.com/photos/2526105/pexels-photo-2526105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    background-position: center;
+    /*dézoomer l'image*/
+    transform: scale(1.1);
+    /*dézoomer l'image*/
+    transition: all 1s ease-in-out;
+    color: black;
+    font-weight: bold;
+.p__form{
+    display: none;
+}
+
+
+}
+
+
+
+
+
+
