@@ -2,9 +2,18 @@ import React, {useState} from "react";
 import styled from "@emotion/styled";
 import {Link,useNavigate} from "react-router-dom";
 import tarifs from "./tarifs";
-import {background} from "@chakra-ui/react";
+import {background, Box} from "@chakra-ui/react";
 import {color} from "framer-motion";
 import {AppContext} from "./context/appcontext";
+import {
+    Slider,
+    SliderTrack,
+    SliderFilledTrack,
+    SliderThumb,
+    SliderMark,
+} from '@chakra-ui/react'
+
+import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 
 
 
@@ -70,14 +79,14 @@ export default function Formulaire(){
     const Menu = ({open}) => {
         return (
             <StyledMenu open={open}>
-                <Link to={"/home"}>
+                <Link to={"/tarifs"}>
                     Accueil
                 </Link>
                 <a href="titovideo/src/tarifs">
                     Nous connaître
                 </a>
-                <Link to="/tarifs">
-                    Tarifs
+                <Link to="/home">
+                    Mes commandes
                 </Link>
 
                 <a  onClick={logout} className="btn btn-primary">
@@ -142,15 +151,74 @@ export default function Formulaire(){
     }
 
 
+        const [showPopup1, setShowPopup1] = useState(false);
+    const [showPopup2, setShowPopup2] = useState(false);
+    const [showPopup3, setShowPopup3] = useState(false);
+    const [showPopup4, setShowPopup4] = useState(false);
+    const [showPopup5, setShowPopup5] = useState(false);
+    const [showPopup6, setShowPopup6] = useState(false);
+    const [showPopup7, setShowPopup7] = useState(false);
+
+        const togglePopup = () => {
+            setShowPopup1(!showPopup1);
+            //seule la premiere popup marche
 
 
+        }
 
+    const togglePopup2 = () => {
+        setShowPopup2(!showPopup2);
+        //seule la premiere popup marche
+
+
+    }
+
+    const togglePopup3 = () => {
+        setShowPopup3(!showPopup3);
+        //seule la premiere popup marche
+
+
+    }
+
+    const togglePopup4 = () => {
+        setShowPopup4(!showPopup4);
+        //seule la premiere popup marche
+
+
+    }
+
+    const togglePopup5 = () => {
+        setShowPopup5(!showPopup5);
+        //seule la premiere popup marche
+
+
+    }
+
+    const togglePopup6 = () => {
+        setShowPopup6(!showPopup6);
+        //seule la premiere popup marche
+    }
+
+    const togglePopup7 = () => {
+        setShowPopup7(!showPopup7);
+        //seule la premiere popup marche
+    }
+
+    const [sliderValue, setSliderValue] = useState(null)
+
+    const labelStyles = {
+        mt: '2',
+        ml: '-2.5',
+
+        fontSize: 'sm',
+    }
 
 
 
 
     return(
-        <div className="body">
+        <body className="body_form">
+        <div>
 
 
             <header className="header">
@@ -160,25 +228,131 @@ export default function Formulaire(){
                     <Menu open={open} setOpen={setOpen}/>
                 </div>
             </header>
-
+        <div className="form__container">
             <h1 className="form__title">Choisissez ce que vous voulez avoir </h1>
+        </div>
 
             <div className="form__video">
-                <button  className="form__video__1">
+                <button onClick={togglePopup} className="form__video__1">
                     <p className="p__form">Vlog/irl</p>
+                    {showPopup1 &&(
+
+
+                        <p className="popup__text">Ajouté</p>
+
+
+
+                    )
+                    }
                 </button>
-                <button className="form__video__2">
+
+                <button onClick={togglePopup2} className="form__video__2">
                     <p className="p__form">Gaming</p>
+                    {showPopup2 &&(
+
+
+                        <p className="popup__text">Ajouté</p>
+
+
+
+                    )
+                    }
+
                 </button>
-                <button className="form__video__3">
+                <button onClick={togglePopup3} className="form__video__3">
                     <p className="p__form">Cuisine</p>
+                    {showPopup3 &&(
+
+                            <p className="popup__text">Ajouté</p>
+
+
+                                )
+                    }
                 </button>
-                <button className="form__video__4">
+                <button onClick={togglePopup4} className="form__video__4">
                     <p className="p__form">Evènement</p>
+                    {showPopup4 &&(
+
+                            <p className="popup__text">Ajouté</p>
+
+
+                                )
+                    }
+                </button>
+
+            </div>
+            <div className={"form__video2"}>
+                <button onClick={togglePopup5} className="form__video__5">
+
+                    <p className={"p__form"}>9/16</p>
+                    {showPopup5 &&(
+
+                            <p className="popup__text">Ajouté</p>
+                        )
+                    }
+                </button>
+
+                <button onClick={togglePopup6} className="form__video__6">
+
+                    <p className={"p__form"}>1/1</p>
+                    {showPopup6 &&(
+
+                        <p className="popup__text">Ajouté</p>
+                    )
+                    }
+                </button>
+
+                <button onClick={togglePopup7} className="form__video__7">
+
+                    <p className={"p__form"}>19/80</p>
+                    {showPopup7 &&(
+
+                        <p className="popup__text">Ajouté</p>
+                    )
+                    }
                 </button>
 
             </div>
 
+            <div  className="form__video3">
+                <h2 className="form__title2">Nombre de point de vue (20€ par point de vue 1 inclus)</h2>
+                <Box pt={6} pb={2}>
+                    <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)}>
+                        <SliderMark value={0} {...labelStyles}>
+                            0
+                        </SliderMark>
+                        <SliderMark value={50} {...labelStyles}>
+                            50
+                        </SliderMark>
+                        <SliderMark value={100} {...labelStyles}>
+                            100
+                        </SliderMark>
+                        <SliderMark
+                            value={sliderValue}
+                            textAlign='center'
+                            bg=' #7421fc'
+                            color='white'
+                            mt='-10'
+                            ml='-5'
+                            w='12'
+                        >
+                            {sliderValue}
+                        </SliderMark>
+                        <SliderTrack>
+                            <SliderFilledTrack />
+                        </SliderTrack>
+                        <SliderThumb />
+                    </Slider>
+                </Box>
+
+                <Checkbox defaultChecked>Sous titres</Checkbox>
+            </div>
+
+            <button className="form__btn">Valider</button>
+
+
+
         </div>
+        </body>
     )
 }

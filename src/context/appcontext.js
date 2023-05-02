@@ -5,6 +5,9 @@ import Login from "../login";
 import App from "../App";
 import Tarifs from "../tarifs";
 import Formulaire from "../formulaire";
+import Signup from "../signup";
+import {navigate} from "@reach/router";
+import { ChakraProvider } from '@chakra-ui/react'
 
 export const AppContext = createContext(null);
 
@@ -12,6 +15,7 @@ export function AppProvider() {
 
         const [currentUser, setCurrentUser] = useState(null)
         const [currentCommande, setCurrentCommande] = useState(null)
+
 
 
 
@@ -30,6 +34,9 @@ export function AppProvider() {
                 path: '/login',
                 element: <Login/>
             },
+            {
+                path: '/signup',
+                element: <Signup/>},
             {
                 path: '/',
                 element: user.loggedIn ? (<App />) : (<Login />)
@@ -53,11 +60,13 @@ export function AppProvider() {
         ]);
 
         return (
+            <ChakraProvider>
             <AppContext.Provider value={{
                 currentUser, setCurrentUser,
                 user, setUser,currentCommande,setCurrentCommande}}>
                 <RouterProvider router={router} />
             </AppContext.Provider>
+            </ChakraProvider>
         )
 
 

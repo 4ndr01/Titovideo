@@ -5,7 +5,7 @@ app.use(cors());
 const http = require('http');
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
-const PORT = 3001;
+const PORT = 3000;
 const server = http.createServer(app);
 
 
@@ -46,34 +46,27 @@ mongoose.connect('mongodb+srv://marv:root@cluster0.l1ulwbg.mongodb.net/titovideo
 
 //requetes post
 const bodyParser = require('body-parser');
-const {Sequelize} = require("sequelize");
-const fs = require("fs");
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const sequelize = new Sequelize('mydatabase', 'myusername', 'mypassword', {
-    host: 'localhost',
-    dialect: 'mysql'
-});
 
-const File = sequelize.define('File', {
-    name: Sequelize.STRING,
-    data: Sequelize.BLOB('long')
-});
 
-//envoie de fichier
-app.post('/upload', upload.single('file'), (req, res) => {
-    const file = req.file;
-    File.create({
-        name: file.originalname,
-        data: fs.readFileSync(file.path)
-    }).then(() => {
-        res.send('Fichier téléchargé avec succès');
-    }).catch(error => {
-        console.error(error);
-        res.status(500).send('Erreur lors du téléchargement du fichier');
+//inscription
+app.post('/signup', (req, res) => {
+    console.log(req.body);
+    const users = new Users({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+
+
+    })
+    //save to database
+    users.save().then(data => {
+        res.json(data);
     });
 });
+
+
+
 

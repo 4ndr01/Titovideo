@@ -5,16 +5,23 @@ import {useContext, useEffect, useState} from "react";
 import {AppContext} from "./context/appcontext";
 import styled from "@emotion/styled";
 import {Link, useNavigate} from "react-router-dom";
+import {navigate} from "@reach/router";
 
 
 export default function Tarifs() {
-
+    const appContext = useContext(AppContext)
     const [open, setOpen] = useState(false);
     const node = React.useRef();
     const navigate = useNavigate();
 
 
 
+    const logout = (e) => {
+        e.preventDefault()
+        localStorage.removeItem('token')
+
+        navigate('/login')
+    }
 
     const StyledMenu = styled.nav`
       display: flex;
@@ -53,22 +60,23 @@ export default function Tarifs() {
           color: #343078;
         }
       }
+      
     `
 
     const Menu = ({open}) => {
         return (
             <StyledMenu open={open}>
-                <Link to="/home">
+                <Link to="/tarifs">
                     Accueil
                 </Link>
                 <a href="titovideo/src/tarifs">
                     Nous connaître
                 </a>
-                <Link to="/tarifs">
-                    Tarifs
+                <Link to="/home">
+                    Mes commandes
                 </Link>
 
-                <a className="btn btn-primary">
+                <a onClick={logout} className="btn btn-primary">
                     Déconnexion
                 </a>
             </StyledMenu>
@@ -184,7 +192,7 @@ export default function Tarifs() {
                         <p className={"info__p4"}>Conception sonore et mixage</p>
                         <p className={"info__p5"}>Etalonnage des couleurs</p>
                         <p className={"info__p6"}>Sous-titres</p>
-                        <button className={"btn_tarifs"} onClick={btn_click}>Commander</button>
+                        <button className={"btn_tarifs2"} onClick={btn_click}>Commander</button>
                     </div>
                 </div>
                 </div>

@@ -75,15 +75,15 @@ export default function App() {
     const Menu = ({open}) => {
         return (
             <StyledMenu open={open}>
-                <a href="">
+                <Link to={"/tarifs"}>
                     Accueil
-                </a>
+                </Link>
                 <a href="">
                     Nous connaître
                 </a>
 
-                <Link to={'/tarifs'}>
-                    Tarifs
+                <Link to={'/home'}>
+                    Mes commandes
                 </Link>
 
 
