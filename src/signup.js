@@ -55,7 +55,7 @@ export default function Signup() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(user)
         };
-        const response = await fetch('http://localhost:3000/signup', requestOptions);
+        const response = await fetch('http://localhost:3001/signup', requestOptions);
         const data = await response.json();
         console.log(data)
             if (data === true) {
@@ -63,7 +63,7 @@ export default function Signup() {
             }
 
             if (appContext.user.loggedIn === false) {
-                navigate('/home')
+                navigate('/tarifs')
             }
     }
     };

@@ -5,6 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {AppContext} from "./context/appcontext";
 import styled from "@emotion/styled";
+import Login from "./login";
 
 
 
@@ -14,21 +15,7 @@ export default function App() {
     const navigate = useNavigate();
 
 
-    const [user, setUser] = useState(
-        {
-            username: 'admin',
-            email: ''
-        }
-    );
 
-    const [file, setFile] = useState(null);
-
-    useEffect(() => {
-            if (appContext.currentUser) {
-                setUser(appContext.currentUser)
-            }
-        }
-        , [appContext.currentUser])
 
 
 
@@ -172,23 +159,7 @@ export default function App() {
 
 
 
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
-    };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('file', file);
-        fetch('http://localhost:30001/upload', {
-            method: 'POST',
-            body: formData
-        }).then(response => {
-            console.log(response);
-        }).catch(error => {
-            console.error(error);
-        });
-    };
 
     const [open, setOpen] = React.useState(false);
     const node = React.useRef();
@@ -214,12 +185,9 @@ export default function App() {
 
 
 
-                                <h5 className="user">Bienvenue {user.username}</h5>
+
+                                <h6 className="user">Bonjour {appContext.currentUser?.username}</h6>
                                 <h6 className="user">Vos commandes</h6>
-                <form className="upload" onSubmit={handleSubmit}>
-                    <input className="input_upload" type="file" id="myFileInput" onChange={handleFileChange} />
-                    <button className="btn_upload" type="submit">Télécharger</button>
-                </form>
 
                                 {data.map((commande) => (
                                     <div className="commande_en_cours">

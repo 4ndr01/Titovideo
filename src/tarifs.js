@@ -19,7 +19,7 @@ export default function Tarifs() {
     const logout = (e) => {
         e.preventDefault()
         localStorage.removeItem('token')
-
+        appContext.setCurrentUser(null)
         navigate('/login')
     }
 

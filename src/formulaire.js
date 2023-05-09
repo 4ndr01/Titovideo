@@ -216,9 +216,15 @@ export default function Formulaire(){
 
 
 
+
+
+
+
+
+
     return(
         <body className="body_form">
-        <div>
+        <div className="div_form">
 
 
             <header className="header">
@@ -347,6 +353,8 @@ export default function Formulaire(){
 
                 <Checkbox defaultChecked>Sous titres</Checkbox>
             </div>
+
+
 
             <button className="form__btn">Valider</button>
 
