@@ -10,6 +10,7 @@ import Monteur_login from "../monteur_login";
 import {navigate} from "@reach/router";
 import { ChakraProvider } from '@chakra-ui/react'
 
+
 export const AppContext = createContext(null);
 
 export function AppProvider() {
@@ -26,8 +27,11 @@ export function AppProvider() {
 
         //login
         const [user, setUser] = useState({
-            loggedIn:false,
-        });
+            loggedIn: false,
+            username: null,
+            password: null,
+
+        })
 
         const router = createBrowserRouter([
             {
@@ -39,7 +43,7 @@ export function AppProvider() {
                 element: <Signup/>},
             {
                 path: '/',
-                element: user.loggedIn ? (<Tarifs/>) : (<Login />)
+                element: user.loggedIn ? <App/> : <Login/>
 
             },
 
@@ -58,9 +62,12 @@ export function AppProvider() {
                 element: <Formulaire />
             },
             {
-                path: '/monteur_login',
-                element: <Monteur_login/>
-            }
+                path:'/monteur_login',
+                element: <Monteur_login />
+            },
+
+
+
         ]);
 
         return (

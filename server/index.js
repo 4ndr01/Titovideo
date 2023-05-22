@@ -4,7 +4,6 @@ const app = express();
 app.use(cors());
 const http = require('http');
 const multer  = require('multer');
-const upload = multer({ dest: 'uploads/' });
 const PORT = 3001;
 const server = http.createServer(app);
 
@@ -25,44 +24,32 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
     username: String,
     password: String,
+    email: String,
+    commande: Array
+
+
+
+}
+);
+
+//nouveaux utilisateurs
+
+const usershema2 = new Schema({
+    username: String,
+    password: String,
     email: String
 
-
-
 }
 );
+const Users2 = mongoose.model('Users2', usershema2);
 
 
 
-/*
-const Users2 = mongoose.model('Users2', userSchema);
 
-mongoose.connect('mongodb://localhost:27017/titovideo/Users2', { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-    console.log("connected to database");
-}
-);
-*/
 
-//login
 
-/*
-app.get('/signin2')
-const { username, password } = req.query;
 
-Users2.findOne({ username: username, password: password })
-    .then((user2) => {
-        if (user2) {
-            res.json(user2);
 
-        } else {
-            res.json(false);
-        }
-    })
-    .catch((err) => {
-        console.error(err);
-        res.status(500).json({ error: 'An error occurred while searching for the user.' });
-    });
-*/
 
 
 
@@ -83,6 +70,75 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+//connexion pour users2
+
+app.get('/signin2', (req, res) => {
+
+    const { username, password } = req.query;
+
+    Users2.findOne({ username: username, password: password })
+        .then((user) => {
+            if (user) {
+                res.json(user);
+
+            } else {
+                res.json(false);
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: 'An error occurred while searching for the user.' });
+        });
+
+}
+);
+
+
+app.post('/boutons', (req, res) => {
+
+
+
+
+    const commande = req.body;
+
+
+    //find the user
+
+        const { email } = req.query;
+
+        Users.findOne({ email: email })
+            .then((user) => {
+                if (user) {
+                    res.json(user);
+
+                } else {
+                    res.json(false);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                res.status(500).json({ error: 'An error occurred while searching for the user.' });
+            });
+
+
+    Users.updateOne({ $push: { commande: commande} })
+        .then((user) => {
+            console.log("debug2", user);
+            res.status(200).json(user);
+
+
+
+
+        })
+        .catch((err) => {
+            console.error(err);
+            console.log("debug3", err);
+            //res.status(500).json({ error: 'An error occurred while searching for the user.' });
+        });
+
+
+}
+);
 
 //inscription
 app.post('/signup', (req, res) => {
@@ -91,6 +147,8 @@ app.post('/signup', (req, res) => {
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
+        commande: req.body.commande
+
 
 
     })
@@ -122,6 +180,8 @@ app.get('/signin', (req, res) => {
 
     }
 );
+
+
 
 
 

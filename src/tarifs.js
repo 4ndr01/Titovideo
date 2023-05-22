@@ -5,7 +5,9 @@ import {useContext, useEffect, useState} from "react";
 import {AppContext} from "./context/appcontext";
 import styled from "@emotion/styled";
 import {Link, useNavigate} from "react-router-dom";
-import {navigate} from "@reach/router";
+import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import Login from "./login";
+
 
 
 export default function Tarifs() {
@@ -13,6 +15,26 @@ export default function Tarifs() {
     const [open, setOpen] = useState(false);
     const node = React.useRef();
     const navigate = useNavigate();
+
+
+    const [user, setUser] = useState(
+        {
+            username: '',
+            image: '',
+        }
+    );
+
+    //afficher
+
+    useEffect(() => {
+
+            if (appContext.currentUser) {
+                setUser(appContext.currentUser)
+                console.log(appContext.currentUser)
+            }
+
+        }
+        , [appContext.currentUser, appContext])
 
 
 
@@ -141,6 +163,47 @@ export default function Tarifs() {
         console.log("click")
         navigate("/formulaire")
     }
+
+    let [count, setCount] = useState(0);
+    let [prix, setPrix] = useState(0);
+
+    const short=120;
+    const youtube=250;
+    const max=2000;
+
+
+
+
+    const handlePlusClick = () => {
+
+        for (let i = 0; i < 1; i++) {
+            setCount(count + 1);
+            if (count>1){
+                setPrix(prix + short*0.95)
+            }else {
+                setPrix(prix + short );
+            }
+
+        }
+
+        console.log(count)
+    }
+
+    const handlePlusClick2 = () => {
+       for (let i = 0; i < 1; i++) {
+            setCount(count + 1);
+            if (count>1){
+                setPrix(prix + youtube*0.95)
+            }else {
+                setPrix(prix + youtube );
+            }
+        }
+
+        console.log(count)
+    }
+
+
+
     return (
         <div>
             <div>
@@ -154,6 +217,7 @@ export default function Tarifs() {
                     <Menu open={open} setOpen={setOpen}/>
                 </div>
             </header>
+            <h1 className="tarifs_title3">Bonjour {user.username}</h1>
             <h2 className={"tarifs_title"}>Les tarifs</h2>
 
             <div className={"body2"}>
@@ -177,6 +241,47 @@ export default function Tarifs() {
                     </div>
                 </div>
 
+                    <div className={"tarifs_div1"}>
+                        <div className={"tarifs_div2"}>
+                            <h3 className={"tarifs_title2"}>Pack personnalisé</h3>
+                            <p className={"prix"}> € {prix},00 EUR</p>
+                            {/*<Checkbox name="checkbox1" className={"premium_p1"} isInvalid >Montage Short</Checkbox>
+                            <Checkbox name="checkbox2" className={"premium_p2"} isInvalid>Montage Youtube</Checkbox>*/}
+                            <div className={"premium"}>
+                                <div  className={"premium_p"}>
+
+                                    <p>Montage Short</p>
+                                <button className="plus-button" onClick={handlePlusClick}>
+                                    <span className={"plus1"}>+</span>
+                                </button>
+                                </div>
+                                <div  className={"premium_p"}>
+
+                                    <p>Montage Youtube</p>
+
+
+
+                                <button className="plus-button" onClick={handlePlusClick2}>
+                                    <span className={"plus"}>+</span>
+
+
+                                </button>
+                                </div>
+
+
+
+
+                            </div>
+
+
+                                <p className={"panier"}>Nombre de montage choisis {count}</p>
+                        </div>
+                        <button className={"btn_tarifs"} onClick={btn_click}>Commander</button>
+                    </div>
+
+
+
+
 
 
                 <div className={"tarifs_div1"}>
@@ -190,7 +295,7 @@ export default function Tarifs() {
                         <p className={"info__p2"}>Rendu 20minutes maximum</p>
                         <p className={"info__p3"}>Graphiques animés</p>
                         <p className={"info__p4"}>Conception sonore et mixage</p>
-                        <p className={"info__p5"}>Etalonnage des couleurs</p>
+                        <p className={"info__p5"}>Étalonnage des couleurs</p>
                         <p className={"info__p6"}>Sous-titres</p>
                         <button className={"btn_tarifs2"} onClick={btn_click}>Commander</button>
                     </div>

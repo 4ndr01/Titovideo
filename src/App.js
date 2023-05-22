@@ -6,6 +6,10 @@ import {Link, useNavigate} from "react-router-dom";
 import {AppContext} from "./context/appcontext";
 import styled from "@emotion/styled";
 import Login from "./login";
+import ProgressBar from 'react-bootstrap/ProgressBar';
+
+
+
 
 
 
@@ -188,6 +192,7 @@ export default function App() {
 
                                 <h6 className="user">Bonjour {appContext.currentUser?.username}</h6>
                                 <h6 className="user">Vos commandes</h6>
+                                 <ProgressBar className="progress" now={60} label={`${60}%`} />
 
                                 {data.map((commande) => (
                                     <div className="commande_en_cours">

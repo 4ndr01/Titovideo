@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
 import {Link,useNavigate} from "react-router-dom";
 import tarifs from "./tarifs";
@@ -34,6 +34,28 @@ export default function Formulaire(){
         appContext.setCurrentUser(null)
         navigate('/login')
     }
+
+    const [user, setUser] = useState(
+        {
+            username: '',
+            password: '',
+            commande: '',
+            email: '',
+        }
+    );
+
+    //afficher
+
+    useEffect(() => {
+
+            if (appContext.currentUser) {
+                setUser(appContext.currentUser)
+                console.log(appContext.currentUser)
+            }
+
+        }
+        , [appContext.currentUser, appContext])
+
 
 
 
@@ -215,16 +237,56 @@ export default function Formulaire(){
 
 
 
+    const [clickedButtons, setClickedButtons] = useState([]);
+
+    const handleButtonClick = async (button) => {
+        setClickedButtons([...clickedButtons, button]);
 
 
 
 
 
+
+    };
+
+
+    const submit = async (e) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({clickedButtons})
+        };
+        console.log("request sent1", requestOptions);
+        console.log(user.username, user.password);
+        const response = await fetch(`http://localhost:3001/boutons?username=${user.username}&password=${user.password}`, requestOptions);
+        console.log("request sent2");
+        const data = await response.json();
+        console.log(data);
+        if (data.status === 200) {
+            console.log("ok")
+
+        } else {
+            console.log("error")
+        }
+    }
+
+    //recupère le local storage
+
+    const info = JSON.parse(localStorage.getItem('user'));
+
+
+
+
+    console.log(clickedButtons);
+//recupère le local storage
+    const User = JSON.parse(localStorage.getItem('user'));
 
 
     return(
+        <form onSubmit={submit}>
         <body className="body_form">
         <div className="div_form">
+
 
 
             <header className="header">
@@ -239,7 +301,10 @@ export default function Formulaire(){
         </div>
 
             <div className="form__video">
-                <button onClick={togglePopup} className="form__video__1">
+
+                <div id="button1"
+                        onClick={() => handleButtonClick("vlog/irl")}
+                        className={"button1"}>
                     <p className="p__form">Vlog/irl</p>
                     {showPopup1 &&(
 
@@ -250,9 +315,11 @@ export default function Formulaire(){
 
                     )
                     }
-                </button>
+                </div>
 
-                <button onClick={togglePopup2} className="form__video__2">
+                <div id="button2"
+                         onClick={() => handleButtonClick("gaming")}
+                         className={"button2"}>
                     <p className="p__form">Gaming</p>
                     {showPopup2 &&(
 
@@ -264,8 +331,9 @@ export default function Formulaire(){
                     )
                     }
 
-                </button>
-                <button onClick={togglePopup3} className="form__video__3">
+                </div>
+                <div id="button3"
+                        onClick={() => handleButtonClick("cuisine")} className="form__video__3">
                     <p className="p__form">Cuisine</p>
                     {showPopup3 &&(
 
@@ -274,8 +342,10 @@ export default function Formulaire(){
 
                                 )
                     }
-                </button>
-                <button onClick={togglePopup4} className="form__video__4">
+                </div>
+                <div id="button4"
+                         onClick={() => handleButtonClick("evenement")}
+                         className={"button1"}>
                     <p className="p__form">Evènement</p>
                     {showPopup4 &&(
 
@@ -284,11 +354,11 @@ export default function Formulaire(){
 
                                 )
                     }
-                </button>
+                </div>
 
             </div>
             <div className={"form__video2"}>
-                <button onClick={togglePopup5} className="form__video__5">
+                <div onClick={()=> handleButtonClick("9/16")} className="form__video__5">
 
                     <p className={"p__form"}>9/16</p>
                     {showPopup5 &&(
@@ -296,9 +366,9 @@ export default function Formulaire(){
                             <p className="popup__text">Ajouté</p>
                         )
                     }
-                </button>
+                </div>
 
-                <button onClick={togglePopup6} className="form__video__6">
+                <div onClick={()=>handleButtonClick("1/1")} className="form__video__6">
 
                     <p className={"p__form"}>1/1</p>
                     {showPopup6 &&(
@@ -306,9 +376,9 @@ export default function Formulaire(){
                         <p className="popup__text">Ajouté</p>
                     )
                     }
-                </button>
+                </div>
 
-                <button onClick={togglePopup7} className="form__video__7">
+                <div onClick={()=>handleButtonClick("19/80")} className="form__video__7">
 
                     <p className={"p__form"}>19/80</p>
                     {showPopup7 &&(
@@ -316,7 +386,7 @@ export default function Formulaire(){
                         <p className="popup__text">Ajouté</p>
                     )
                     }
-                </button>
+                </div>
 
             </div>
 
@@ -352,15 +422,18 @@ export default function Formulaire(){
                 </Box>
 
                 <Checkbox defaultChecked>Sous titres</Checkbox>
+                <Checkbox defaultCheked>Fond vert</Checkbox>
+                <input type={"file"}></input>
             </div>
 
 
 
-            <button className="form__btn">Valider</button>
+            <button id="btn_form" onClick={submit} className="form__btn" type="button">Valider</button>
 
 
 
         </div>
         </body>
+        </form>
     )
 }
