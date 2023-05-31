@@ -4,9 +4,10 @@ import {useContext, useEffect, useState} from "react";
 
 import {AppContext} from "./context/appcontext";
 import styled from "@emotion/styled";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, redirect, useNavigate} from "react-router-dom";
 import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import Login from "./login";
+
 
 
 
@@ -19,10 +20,14 @@ export default function Tarifs() {
 
     const [user, setUser] = useState(
         {
-            username: '',
-            image: '',
+            username: ''
         }
     );
+
+
+    //recuperer le user connecté et le  username
+
+    const login = localStorage.getItem('token', user.username)
 
     //afficher
 
@@ -161,7 +166,8 @@ export default function Tarifs() {
 
     const btn_click = () => {
         console.log("click")
-        navigate("/formulaire")
+        let url = "https://airtable.com/shrF1CTI6Su33nWjD";
+        redirect(url)
     }
 
     let [count, setCount] = useState(0);
@@ -171,6 +177,16 @@ export default function Tarifs() {
     const youtube=250;
     const max=2000;
 
+    const btn_click2 = () => {
+        if (count===0){
+            //bloquer le bouton
+            return(
+                <button disabled={true} onClick={btn_click}>+</button>
+            )
+        }else {
+            navigate("/formulaire")
+        }
+    }
 
 
 
@@ -182,6 +198,12 @@ export default function Tarifs() {
                 setPrix(prix + short*0.95)
             }else {
                 setPrix(prix + short );
+            }
+            if (count===0){
+                //bloquer le bouton
+                return(
+                    <button disabled={true} onClick={btn_click}>+</button>
+                )
             }
 
         }
@@ -217,8 +239,9 @@ export default function Tarifs() {
                     <Menu open={open} setOpen={setOpen}/>
                 </div>
             </header>
-            <h1 className="tarifs_title3">Bonjour {user.username}</h1>
             <h2 className={"tarifs_title"}>Les tarifs</h2>
+            <h1 className="tarifs_title3">Bonjour {login}</h1>
+
 
             <div className={"body2"}>
                 <div className={"tarifs"}>
@@ -237,36 +260,25 @@ export default function Tarifs() {
                     <p className={"info_p3"}>Conception sonore et mixage</p>
                     <p className={"info_p4"}>Habillage vidéo</p>
                     <p className={"info_p5"}>Sous-titres</p>
-                        <button className={"btn_tarifs"} onClick={btn_click}>Commander</button>
+                        <Link className={"btn_tarifs3"} to={"https://airtable.com/shrF1CTI6Su33nWjD"}>Commander</Link>
+
                     </div>
                 </div>
 
                     <div className={"tarifs_div1"}>
                         <div className={"tarifs_div2"}>
                             <h3 className={"tarifs_title2"}>Pack personnalisé</h3>
-                            <p className={"prix"}> € {prix},00 EUR</p>
+                            <p className={"prix"}> € 300,00 EUR</p>
                             {/*<Checkbox name="checkbox1" className={"premium_p1"} isInvalid >Montage Short</Checkbox>
                             <Checkbox name="checkbox2" className={"premium_p2"} isInvalid>Montage Youtube</Checkbox>*/}
                             <div className={"premium"}>
                                 <div  className={"premium_p"}>
 
-                                    <p>Montage Short</p>
-                                <button className="plus-button" onClick={handlePlusClick}>
-                                    <span className={"plus1"}>+</span>
-                                </button>
+                                    <p className={"premium_p2"}>3 Montage Short</p>
+
+
                                 </div>
-                                <div  className={"premium_p"}>
 
-                                    <p>Montage Youtube</p>
-
-
-
-                                <button className="plus-button" onClick={handlePlusClick2}>
-                                    <span className={"plus"}>+</span>
-
-
-                                </button>
-                                </div>
 
 
 
@@ -274,9 +286,8 @@ export default function Tarifs() {
                             </div>
 
 
-                                <p className={"panier"}>Nombre de montage choisis {count}</p>
                         </div>
-                        <button className={"btn_tarifs"} onClick={btn_click}>Commander</button>
+                        <Link to={"https://airtable.com/shrF1CTI6Su33nWjD"} className={"btn_tarifs2"}>Commander</Link>
                     </div>
 
 
@@ -297,7 +308,7 @@ export default function Tarifs() {
                         <p className={"info__p4"}>Conception sonore et mixage</p>
                         <p className={"info__p5"}>Étalonnage des couleurs</p>
                         <p className={"info__p6"}>Sous-titres</p>
-                        <button className={"btn_tarifs2"} onClick={btn_click}>Commander</button>
+                        <Link to={"https://airtable.com/shrF1CTI6Su33nWjD"} className={"btn_tarifs"}>Commander</Link>
                     </div>
                 </div>
                 </div>

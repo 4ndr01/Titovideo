@@ -7,6 +7,8 @@ import Tarifs from "../tarifs";
 import Formulaire from "../formulaire";
 import Signup from "../signup";
 import Monteur_login from "../monteur_login";
+import App_monteur from "../app_monteur";
+import Monteur_command from "../monteur_command";
 import {navigate} from "@reach/router";
 import { ChakraProvider } from '@chakra-ui/react'
 
@@ -65,6 +67,15 @@ export function AppProvider() {
                 path:'/monteur_login',
                 element: <Monteur_login />
             },
+            {
+                path:'/app_monteur',
+                element: <App_monteur />
+            },
+            {
+                path:'/monteur_command',
+                element: <Monteur_command />
+
+            }
 
 
 

@@ -25,7 +25,8 @@ const userSchema = new Schema({
     username: String,
     password: String,
     email: String,
-    commande: Array
+    commande: Array,
+    points: Number
 
 
 
@@ -70,6 +71,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+
+//afficher toutes les commandes de tous les utilisateurs
+
+
+
+app.get('/allcommandes', (req, res) => {
+
+    Users.find()
+        .then((user) => {
+            if (user) {
+                res.json(user);
+
+            } else {
+                res.json(false);
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: 'An error occurred while searching for the user.' });
+        });
+}
+);
+
+
+
+
 //connexion pour users2
 
 app.get('/signin2', (req, res) => {
@@ -104,9 +131,9 @@ app.post('/boutons', (req, res) => {
 
     //find the user
 
-        const { email } = req.query;
+        const { username, password } = req.query;
 
-        Users.findOne({ email: email })
+        Users.findOne({username: username, password: password})
             .then((user) => {
                 if (user) {
                     res.json(user);
@@ -121,22 +148,45 @@ app.post('/boutons', (req, res) => {
             });
 
 
-    Users.updateOne({ $push: { commande: commande} })
+   //envoyer au user connecte
+
+    Users.updateOne({ username: username, password: password }, { $push: { commande: commande } })
         .then((user) => {
-            console.log("debug2", user);
-            res.status(200).json(user);
+            if (user) {
 
 
-
-
+            } else {
+                res.json(false);
+            }
         })
         .catch((err) => {
             console.error(err);
-            console.log("debug3", err);
-            //res.status(500).json({ error: 'An error occurred while searching for the user.' });
         });
 
+}
+);
 
+//afficher les commandes
+
+app.get('/commandes', (req, res) => {
+
+   //afficher les commandes
+
+    const { username, password, commande } = req.query;
+
+    Users.findOne({ username: username, password: password, commande: commande })
+        .then((user) => {
+            if (user) {
+                res.json(user);
+
+            } else {
+                res.json(false);
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: 'An error occurred while searching for the user.' });
+        });
 }
 );
 
@@ -157,6 +207,8 @@ app.post('/signup', (req, res) => {
         res.json(data);
     });
 });
+//afficher toutes les commandes
+
 
 //login
 

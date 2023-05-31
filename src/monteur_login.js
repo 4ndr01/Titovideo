@@ -48,7 +48,7 @@ export default function Monteurlogin(){
             appContext.setCurrentUser(data)
             appContext.user.loggedIn = true;
             //diriger vers tarifs
-            navigate('/')
+            navigate('/app_monteur')
         } else {
             //afficher erreur
             console.log('erreur')

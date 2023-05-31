@@ -343,8 +343,9 @@ a {
 }
 
 .btn_tarifs{
-    margin-top: 6rem;
-
+    margin-top: 6.5rem;
+    display: flex;
+    justify-content: center;
     background-color: #7421fc;
     color: white;
     border: none;
@@ -357,7 +358,9 @@ a {
 }
 
 .btn_tarifs2{
-    margin-top: 4.5rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 10.5rem;
 
     background-color: #7421fc;
     color: white;
@@ -367,6 +370,24 @@ a {
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+
+}
+
+.btn_tarifs3{
+
+    display: flex;
+    justify-content: center;
+    margin-top: 8rem;
+
+    background-color: #7421fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
 
 }
 
@@ -418,6 +439,15 @@ a {
 .premium_p {
     margin-top: 4rem;
     display: flex;
+}
+
+.premium_p2{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    margin-left: 5rem;
+    font-size: 1rem;
+
 }
 
 .body_form{
@@ -633,6 +663,64 @@ a {
 
 }
 
+.form__video__8{
+    color: #edede9;
+    background: #242423;
+    margin-right: 2rem;
+    width: 10rem;
+    height: 10rem;
+
+    border-radius: 10px;
+
+}
+
+.form__video__8:hover{
+
+    .text8{
+        display: block;
+        transition: all 1s ease-in-out;
+    }
+}
+
+.text8{
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: none;
+
+}
+
+.form__video__9{
+color: #edede9;
+    background: #242423;
+    margin-right: 2rem;
+    width: 10rem;
+    height: 10rem;
+
+    border-radius: 10px;
+}
+
+.form__video__9:hover{
+    background: darkolivegreen;
+    transition: all 1s ease-in-out;
+    /*revenir doucement*/
+    transform: scale(1.1);
+
+}
+
+.input_text{
+    margin-top: 2rem;
+    width: 20rem;
+    height: 5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+
+
 .form__video__7:hover{
     width: 15rem;
     height: 10rem;
@@ -737,7 +825,59 @@ a {
     cursor: pointer;
     transition: all 0.5s ease-in-out;
 }
-/*responsive*/
+
+.signup{
+    display: flex;
+    background-color: #100b47;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    height: 30rem;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 2rem;
+}
+
+.sign_form{
+
+}
+
+.section_form{
+
+}
+
+.input_form{
+    margin-top: 2rem;
+    width: 20rem;
+    height: 3rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #1c36a1;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.btn_form{
+    margin-top: 2rem;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 5px;
+    border: none;
+    background-color:  #1c36a1;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
 
 body{
     overflow-x: hidden;

@@ -6,29 +6,14 @@ import {Link, useNavigate} from "react-router-dom";
 import {AppContext} from "./context/appcontext";
 import styled from "@emotion/styled";
 import Login from "./login";
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import axios from 'axios';
-import * as donnees from "react-bootstrap/ElementChildren";
+import {navigate} from "@reach/router";
+import axios from "axios";
+import monteur_command from "./monteur_command";
 
+export default function App_monteur(){
 
-
-
-
-
-
-export default function App() {
     const appContext = useContext(AppContext)
     const navigate = useNavigate();
-
-
-    const [user, setUser] = useState({
-        username: "",
-        commande: "",
-    })
-
-
-
-
 
 
     const StyledMenu = styled.nav`
@@ -74,15 +59,15 @@ export default function App() {
     const Menu = ({open}) => {
         return (
             <StyledMenu open={open}>
-                <Link to={"/tarifs"}>
-                    Vos commandes
+                <Link to={"/app_monteur"}>
+                    Mes commandes
                 </Link>
                 <a href="">
-                    Nous connaître
+                    Commandes en cours
                 </a>
 
                 <Link to={'/home'}>
-                    Mes commandes
+                    Commandes terminées
                 </Link>
 
 
@@ -153,62 +138,88 @@ export default function App() {
         appContext.setCurrentUser(null)
         navigate('/login')
     }
-    //commande en cours
 
+     //aficher les commande en cours
+    const [data, setData] = useState([]);
 
-
-//afficher les commandes
-    const [Donnees, setDonnees] = useState([])
-
-useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
-            const result = await axios(
-          `http://localhost:3001/commandes?username=${user.username}&password=${user.password}&commande=${user.commande}`
-
-        );
-            setDonnees(result.data);
+            try {
+                const response = await axios.get('https://api.airtable.com/v0/appJkUabioFFbqFYY/tblalAaM1SOVl9WiS',
+                    {
+                        headers: {
+                            Authorization: `Bearer keyhB7TwnkZ7VZWDI`,
+                        },
+                    }
+                );
+                setData(response.data.records);
+            }catch (error) {
+                console.log(error);
+            }
         };
-        fetchData().then(r => console.log(r));
+        fetchData();
     }, []);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
     const [open, setOpen] = React.useState(false);
 
-    const node = React.useRef();
-    return (
+    return(
+
         <div>
             <div>
 
             </div>
 
-                <header className="header">
-                    <h1 className="header__title">Tito</h1><h1 className="header__title2">video</h1>
+            <header className="header">
+                <h1 className="header__title">Tito</h1><h1 className="header__title2">video</h1>
 
-                        <Burger open={open} setOpen={setOpen}/>
-                        <Menu open={open} setOpen={setOpen}/>
+                <Burger open={open} setOpen={setOpen}/>
+                <Menu open={open} setOpen={setOpen}/>
 
-                </header>
+            </header>
 
-            {Donnees.map((donnee) => (
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">{donnee.commande}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">{donnee.username}</h6>
-                        <p className="card-text">{donnee.password}</p>
-                        <a href="#" className="card-link">Card link</a>
-                        <a href="#" className="card-link">Another link</a>
-                    </div>
+
+            <div className="body">
+
+
+
+
+
+
+
+                <h6 className="user">Bonjour {appContext.currentUser?.username}</h6>
+                <h6 className="user">Vos commandes</h6>
+
+
+                <div>
+                    {data.map((record) => (
+                        <div className="commande_en_cours" key={record.id}>
+                            <p>{record.fields["Nom prénom"]}</p>
+                            <p>{record.fields["Ajout de décors en fond (Fond vert)"]}</p>
+                            Images additionnelles (Banque image, vidéo, gifs, animation…)
+
+
+                        </div>
+                    ))}
                 </div>
 
-            ))}
 
 
 
-
+            </div>
         </div>
-    );
-}
-
-
-
+    )
+    }

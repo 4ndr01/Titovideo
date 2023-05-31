@@ -14,6 +14,8 @@ import {
 } from '@chakra-ui/react'
 
 import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import Modal from 'react-modal';
+import {Redirect} from "@reach/router";
 
 
 
@@ -24,9 +26,18 @@ import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 export default function Formulaire(){
 
     const [open, setOpen] = useState(false);
+    const [open2, setOpen2] = useState(false);
     const node = React.useRef();
     const appContext = React.useContext(AppContext);
     const navigate = useNavigate();
+
+    const openModal = () => {
+        setOpen2(false);
+    };
+
+    const closeModal = () => {
+        setOpen2(true);
+    };
 
     const logout = (e) => {
         e.preventDefault()
@@ -41,6 +52,7 @@ export default function Formulaire(){
             password: '',
             commande: '',
             email: '',
+            points: '',
         }
     );
 
@@ -237,7 +249,8 @@ export default function Formulaire(){
 
 
 
-    const [clickedButtons, setClickedButtons] = useState([]);
+
+ const [clickedButtons, setClickedButtons] = useState([]);
 
     const handleButtonClick = async (button) => {
         setClickedButtons([...clickedButtons, button]);
@@ -265,8 +278,23 @@ export default function Formulaire(){
         if (data.status === 200) {
             console.log("ok")
 
+
         } else {
             console.log("error")
+
+            return(
+                <Modal
+                    isOpen={open2}
+                    onRequestClose={closeModal}
+                    contentLabel="Exemple de pop-up"
+                >
+                    <h2>Titre de la pop-up</h2>
+                    <p>Contenu de la pop-up</p>
+
+                    <button onClick={closeModal}>Fermer</button>
+                </Modal>
+
+            )
         }
     }
 
@@ -297,6 +325,9 @@ export default function Formulaire(){
                 </div>
             </header>
         <div className="form__container">
+
+
+
             <h1 className="form__title">Choisissez ce que vous voulez avoir </h1>
         </div>
 
@@ -388,20 +419,45 @@ export default function Formulaire(){
                     }
                 </div>
 
+                <div onClick={()=>handleButtonClick("sous-titres")} className="form__video__8">
+
+                    <p className={"p__form"}>Sous-Titres</p>
+                    {showPopup7 &&(
+
+                        <p className="popup__text">Ajouté</p>
+                    )
+                    }
+                    <p className="text8">ABC</p>
+                </div>
+
+                <div onClick={()=>handleButtonClick("fond vert")} className="form__video__9">
+
+                    <p className={"p__form"}>Fond vert</p>
+                    {showPopup7 &&(
+
+                        <p className="popup__text">Ajouté</p>
+                    )
+                    }
+
+                </div>
+
             </div>
+
+            <input className="input_text" type={"text"} placeholder={"Ajouter un commentaire"}></input>
+
 
             <div  className="form__video3">
                 <h2 className="form__title2">Nombre de point de vue (20€ par point de vue 1 inclus)</h2>
                 <Box pt={6} pb={2}>
-                    <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)}>
+                    <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)} step={50}>
                         <SliderMark value={0} {...labelStyles}>
                             0
                         </SliderMark>
                         <SliderMark value={50} {...labelStyles}>
-                            50
+                            5
                         </SliderMark>
                         <SliderMark value={100} {...labelStyles}>
-                            100
+                            10
                         </SliderMark>
                         <SliderMark
                             value={sliderValue}
@@ -421,14 +477,13 @@ export default function Formulaire(){
                     </Slider>
                 </Box>
 
-                <Checkbox defaultChecked>Sous titres</Checkbox>
-                <Checkbox defaultCheked>Fond vert</Checkbox>
+
                 <input type={"file"}></input>
             </div>
 
 
 
-            <button id="btn_form" onClick={submit} className="form__btn" type="button">Valider</button>
+            <button id="btn_form" onClick={submit} className="form__btn" type="button" >Valider</button>
 
 
 

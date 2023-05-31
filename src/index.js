@@ -12,6 +12,7 @@ import chakraTheme from '@chakra-ui/theme'
 import tarifs from "./tarifs";
 import Formulaire from "./formulaire";
 
+
 const { Button } = chakraTheme.components
 
 const theme = extendBaseTheme({
@@ -29,6 +30,7 @@ root.render(
             <AppProvider />
                 <BrowserRouter>
                     <Routes>
+
 
                         <Route path="/login" element={<Login />} />
 

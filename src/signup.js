@@ -71,22 +71,22 @@ export default function Signup() {
     return (
         <div className="signup">
             <h1>Créer un compte</h1>
-            <form onSubmit={onSubmit}>
-                <section>
-                    <input type="text" name="username" value={user.username} onChange={onChange} placeholder="Nom d'utilisateur" required/>
+            <form className="sign_form" onSubmit={onSubmit}>
+                <section className="section_form">
+                    <input  className="input_form" type="text" name="username" value={user.username} onChange={onChange} placeholder="Nom d'utilisateur" required/>
                 </section>
-                <section>
-                    <input type="email" name="email" value={user.email} onChange={onChange} placeholder="Email" required/>
+                <section className="section_form">
+                    <input className="input_form" type="email" name="email" value={user.email} onChange={onChange} placeholder="Email" required/>
                 </section>
-                <section>
-                    <input type="password" name="password" value={user.password} onChange={onChange} placeholder="Mot de passe" required/>
+                <section className="section_form">
+                    <input  className="input_form" type="password" name="password" value={user.password} onChange={onChange} placeholder="Mot de passe" required/>
                 </section>
-                <section>
-                    <input type="password" name="password2" value={user.password2} onChange={onChange} placeholder="Confirmer le mot de passe" required/>
+                <section className="section_form">
+                    <input  className="input_form" type="password" name="password2" value={user.password2} onChange={onChange} placeholder="Confirmer le mot de passe" required/>
                     <p>{errorMessage}</p>
 
                 </section>
-                <input type="submit" value="S'inscrire"/>
+                <button className="btn_form" type="submit" value="S'inscrire">S'inscrire</button>
             </form>
         </div>
     )

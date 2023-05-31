@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from "react";
 import {useContext, useEffect, useState} from "react";
@@ -7,28 +6,16 @@ import {AppContext} from "./context/appcontext";
 import styled from "@emotion/styled";
 import Login from "./login";
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import axios from 'axios';
-import * as donnees from "react-bootstrap/ElementChildren";
+import {navigate} from "@reach/router";
+import axios from "axios";
 
 
 
 
 
-
-
-export default function App() {
+export default function Monteur_command(){
     const appContext = useContext(AppContext)
     const navigate = useNavigate();
-
-
-    const [user, setUser] = useState({
-        username: "",
-        commande: "",
-    })
-
-
-
-
 
 
     const StyledMenu = styled.nav`
@@ -74,15 +61,15 @@ export default function App() {
     const Menu = ({open}) => {
         return (
             <StyledMenu open={open}>
-                <Link to={"/tarifs"}>
-                    Vos commandes
+                <Link to={"/app_monteur"}>
+                    Mes commandes
                 </Link>
                 <a href="">
-                    Nous connaître
+                    Commandes en cours
                 </a>
 
                 <Link to={'/home'}>
-                    Mes commandes
+                    Commandes terminées
                 </Link>
 
 
@@ -153,62 +140,44 @@ export default function App() {
         appContext.setCurrentUser(null)
         navigate('/login')
     }
-    //commande en cours
 
+    //aficher les commande en cours
+    const [user, setUser] = useState({
+        username:"",
+        password:""
+    })
 
-
-//afficher les commandes
-    const [Donnees, setDonnees] = useState([])
-
-useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-          `http://localhost:3001/commandes?username=${user.username}&password=${user.password}&commande=${user.commande}`
-
-        );
-            setDonnees(result.data);
+                `http://localhost:3001/allcommandes`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+            );
+            setUser(result.data);
         };
-        fetchData().then(r => console.log(r));
+        fetchData();
     }, []);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
     const [open, setOpen] = React.useState(false);
 
-    const node = React.useRef();
-    return (
-        <div>
-            <div>
 
-            </div>
-
-                <header className="header">
-                    <h1 className="header__title">Tito</h1><h1 className="header__title2">video</h1>
-
-                        <Burger open={open} setOpen={setOpen}/>
-                        <Menu open={open} setOpen={setOpen}/>
-
-                </header>
-
-            {Donnees.map((donnee) => (
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">{donnee.commande}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">{donnee.username}</h6>
-                        <p className="card-text">{donnee.password}</p>
-                        <a href="#" className="card-link">Card link</a>
-                        <a href="#" className="card-link">Another link</a>
-                    </div>
-                </div>
-
-            ))}
-
-
-
-
-        </div>
-    );
 }
-
-
 

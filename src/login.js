@@ -68,7 +68,7 @@ export default function Login2() {
 
 
 
-
+localStorage.setItem('token', JSON.stringify(user.username))
 
 
 
@@ -91,14 +91,14 @@ export default function Login2() {
                         <Text fontSize='3xl'>Connexion</Text>
                             <div className="form-group">
 
-                                <input className={"input"}   onChange={e => setUser({...user, [e.target.name]: e.target.value})} type="text" value={user.username} name='username'/>
+                                <input className={"input"}  placeholder="identifiant" onChange={e => setUser({...user, [e.target.name]: e.target.value})} type="text" value={user.username} name='username'/>
                                 <p>{errorMessage}</p>
 
 
                             </div>
                             <div className="form-group">
 
-                                <input className={"input"}  onChange={e => setUser({...user, [e.target.name]: e.target.value})} type="password" value={user.password} name='password'/>
+                                <input placeholder="mot de passe" className={"input"}  onChange={e => setUser({...user, [e.target.name]: e.target.value})} type="password" value={user.password} name='password'/>
                             </div>
 
 
